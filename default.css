@@ -1,0 +1,24 @@
+body {
+    font-size: 18px;
+}
+
+a {
+    font-size: 18px;
+}
+
+.post-summary {
+    padding: 1em;
+}
+
+.post-summary h2 a {
+    text-decoration: underline;
+}
+
+a.navbar-item {
+    font-size: 20px;
+}
+
+#nav {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
