@@ -549,6 +549,21 @@ blog post, but no post body."
      "<a href=\"" (chun-blog/get-absolute-url chun-blog/archive-file) "\">" (chun-blog/gettext 'other-posts) "</a>\n"
      "</div>\n"))))
 
+(defun chun-blog/get-preview-region-in-current-buffer ()
+  "Find the start and end of the preview in the current buffer."
+  (goto-char (point-min))
+  (if chun-blog/preview-end
+      (when (or (search-forward (or chun-blog/preview-start "<p>") nil t)
+                (search-forward "<p>" nil t))
+        (let ((start (match-beginning 0)))
+          (or (search-forward chun-blog/preview-end nil t)
+              (search-forward "</p>" nil t))
+          (buffer-substring-no-properties start (point))))
+    (when (search-forward (or chun-blog/preview-start "<p>") nil t)
+      (let ((start (match-beginning 0)))
+        (search-forward "</p>")
+        (buffer-substring-no-properties start (point))))))
+
 ;; TODO
 (defun chun-blog/get-preview (post-filename)
   "Get title, date, tags from POST-FILENAME and get the first paragraph from the rendered HTML."
@@ -608,3 +623,6 @@ Only blog posts that changed since the HTML was created are re-rendered. "
   (chun-blog/assemble-index)
   (chun-blog/assemble-archive)
   )
+
+
+(provide 'chun-blog)
