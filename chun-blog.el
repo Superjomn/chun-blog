@@ -572,6 +572,7 @@ blog post, but no post body."
     (let* ((post-title (chun-blog/get-title post-filename))
            (post-date (chun-blog/get-date post-filename))
            (post-taglist (chun-blog/get-tags post-filename))
+           (post-ellipsis "")
            (preview-region (chun-blog/get-preview-region-in-current-buffer)))
       ;; TODO ...
       (when (and preview-region (search-forward "<p>" nil t))
